@@ -1,5 +1,6 @@
 # Reconstructing a Corrupted PEM File
-https://cyberskyline.com/hosted_events/ncl-fall-2021
+Write up for a problem I solved for the [2021 Fall NCL](https://cyberskyline.com/hosted_events/ncl-fall-2021). I competed with fellow students as part of the the SDSU Cyber Defense Team. In this problem you were given a PEM file with large sections of the data redacted. The goal was to reconstruct the PEM file using data that was not redacted.
+
 Author: Owen Kuhn ([@OwenK2](https://github.com/OwenK2))
 
 ## The Problem

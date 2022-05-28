@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>writeup</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="reconstructing-a-corrupted-pem-file">Reconstructing a Corrupted PEM File</h1>
+<p>Author: Owen Kuhn (<a href="https://github.com/OwenK2"><span class="citation" data-cites="OwenK2">@OwenK2</span></a>)</p>
+<h2 id="the-problem">The Problem</h2>
+<p>The goal is to access a flag stored in <code>/root/flag.txt</code> however to do so we need root access. All we are given is <code>filecorrupted.pem</code>. This file is an RSA private key file with several large sections of corrupted data, in fact over half of the data is corrupted which is represented in the file as large chunks of <code>o</code>.</p>
+<p>We can infer from this that the goal is to reconstruct the PEM file and somehow use that to escalate to root to view the flag.</p>
+<h2 id="understanding-the-format">Understanding the format</h2>
+<p>PEM files follow the <code>ASN.1 DER</code> format and are base64 encoded, therefore we will need to understand this format to get as much information out of the corrupted file as possible. Below is the format for RSA. As you can see there are several integers within the binary data that we will try to extract. It is important to note that existing tools will not work on the corrupted file because the corruption is too extensive.</p>
+<pre><code>PrivateKeyInfo ::= SEQUENCE {
+    version Version,
+    privateKeyAlgorithm AlgorithmIdentifier ,
+    privateKey PrivateKey,
+    attributes [0] Attributes OPTIONAL
+}
+RSAPrivateKey ::= SEQUENCE {
+    version           Version,
+    modulus           INTEGER,  -- n
+    publicExponent    INTEGER,  -- e
+    privateExponent   INTEGER,  -- d
+    prime1            INTEGER,  -- p
+    prime2            INTEGER,  -- q
+    exponent1         INTEGER,  -- d mod (p-1)
+    exponent2         INTEGER,  -- d mod (q-1)
+    coefficient       INTEGER,  -- (inverse of q) mod p
+    otherPrimeInfos   OtherPrimeInfos OPTIONAL
+}</code></pre>
+<p>The ANS.1 DER format is a way of representing data in a compact binary fashion. It is pretty complicated but for our purposes we only need to know how to find <code>INTEGER</code>s. In DER integers have a type of <code>0x02</code>. Below is a figure describing how data is represented in DER.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Type (1 byte)</th>
+<th>HL (1 byte)</th>
+<th>Length (optional n bytes)</th>
+<th>Data (m bytes)</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>The complication arises around <code>HL</code> and <code>Length</code>. The 2 most significant bits of <code>HL</code> describe the class and the lower 6 bits generally describe the length of the data. However if the length of the data cannot be represented in 6 bits then the optional length field must be used. In this case <code>HL</code> describes the length of the length variable. And the length describes the length of the data…</p>
+<p>confusing right. We can look at the MSB of <code>HL</code> to determine if the optional length is used.</p>
+<ul>
+<li>EX. <code>1000 0010</code> = Optional length is 2 bytes which describes length of data<br />
+</li>
+<li>EX. <code>0000 1100</code> = No optional length field; data is 12 bytes long</li>
+</ul>
+<h2 id="decoding-the-format">Decoding the format</h2>
+<p>The next step is to try to pull all of the values we can out of the corrupted PEM file. To do this we need to know where those values are located in the binary data. The first step is to convert the base64 into hex since that is easier to work with. The next step is to loop through the bytes of the PEM file and try to locate all of the integers we can. Below is the code to find integers in the PEM file (after it is base64 decoded into bytes). However we cannot just run this on the given file because it is so corrupted. So first lets make our own PEM file with random data so that we can find where the integers are. Once we find the locations of the integers we can just get those “chunks” of data from the corrupted file.</p>
+<p>To make our own <code>openssl genrsa -out testpem.pem 4096</code> (FYI I found the length of <span class="math inline">\(4096\)</span> by trying increasing powers of <span class="math inline">\(2\)</span> until the number of lines matched the corrupted file)</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>testpem <span class="op">=</span> <span class="bu">bytes</span>.fromhex(<span class="st">&quot;...&quot;</span>) <span class="co"># binary data from testpem.pem</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>pem <span class="op">=</span> <span class="bu">bytes</span>.fromhex(<span class="st">&quot;...&quot;</span>)     <span class="co"># binary data from corrupted.pem</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>chunks <span class="op">=</span> []</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> i <span class="op">&lt;</span> <span class="bu">len</span>(testpem):</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> testpem[i] <span class="op">==</span> <span class="bn">0x02</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        hl <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        length <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (testpem[i<span class="op">+</span><span class="dv">1</span>] <span class="op">&amp;</span> <span class="bn">0x80</span>) <span class="op">&gt;</span> <span class="dv">0</span>:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>            hl <span class="op">=</span> testpem[i<span class="op">+</span><span class="dv">1</span>] <span class="op">&amp;</span> <span class="bn">0x3F</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>            length <span class="op">=</span> <span class="bu">int</span>.from_bytes(testpem[i<span class="op">+</span><span class="dv">2</span>:i<span class="op">+</span>hl<span class="op">+</span><span class="dv">2</span>], byteorder<span class="op">=</span><span class="st">&#39;big&#39;</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            length <span class="op">=</span> testpem[i<span class="op">+</span><span class="dv">1</span>] <span class="op">&amp;</span> <span class="bn">0x3F</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        chunks.append((i<span class="op">+</span><span class="dv">2</span><span class="op">+</span>hl, i<span class="op">+</span><span class="dv">2</span><span class="op">+</span>hl<span class="op">+</span>length))</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(testpem[i<span class="op">+</span><span class="dv">2</span><span class="op">+</span>hl:i<span class="op">+</span><span class="dv">2</span><span class="op">+</span>hl<span class="op">+</span>length].<span class="bu">hex</span>())</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>()</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>        i <span class="op">+=</span> hl <span class="op">+</span> length <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(chunks)</span></code></pre></div>
+<p>This code will output all of the locations of the integers in “chunks” and it will also print the actual hex data that we are extracting. This is important because we want to make sure the code is working. We can now run <code>openssl asn1parse -in testpem.pem</code>.</p>
+<p>This will automatically decode the DER format of our so we can compare our values. This confirms that our program is working (I also realized this command gives us the start positions of the integers which could have been used instead of writing my own program but oh well it was too late at this point).</p>
+<p>Now that we have the areas where the data is actually located we can pull these chunks out of the corrupted file giving us the following variables… Remember these are in the order defined above in the <code>RSAPrivateKey Sequence</code>.</p>
+<pre><code>009ca79d2d2b5cb6b06536fe2b0fe606a8e9676a78627354c4ec671f0b9c6c5e171988d827b6ff8ceab2b8d7de96c84ccc4711a4665538c
+93afdf038ffdce0eb6a1d75322abd1432aa5b0c729cafb79e18540cc833f6d441beb536718162612727de29dc71d827c14aff67ea82d8b0
+b6fabb385fec83e3fb33f1143ee4ecfccebaf1757fe1148a53ec9ce5c431eab23064d1a1bc3b6e48ccdca4431bcad0a9cbcd480e63d9d89
+213bfe7ce83ce0c557574ab8526faf61a5bf067d433495d2cb05f2b50f8d4f5e59cda5698b1024ba58e33d106fa2edfd80987c466071c06
+8e30ee3d15e6fc1cb242931770de36bdd42b937eada4e804fe5e9b1aac6c42adae0c18d583a513e7203b9f6f2a8cda100ce81032511b000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000
+
+000000
+
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000
+
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000dd8c516b1906ebc550f093
+
+00c2c95e64c853063d982ae13287bbe747db57e803bae644ecf195cf75d465f8bed187986358601ff6c241944bc8336980a0cb3549b325f
+4115ea7bc504139873f5415651eb5785e6bd05c945c87916ba21e133ac2c45158f229a333b0ead5ec68bcfa55e8c4128a4c4dd062edde5d
+24d6f35200188a1350abc9917622612d5eab0d80b4fabec99c7a093f21eb36783bc6488da3ed5b641a24c86490ebf72628dc3a78fc82f1d
+22964a4cb2f65b4d7077e2b512d90f5908eb0ec70d6a559ce8661bdd29f007ba522ff06efe6d9fa6ac0d940531eeea2541025ca4300be6a
+63ca79daa26db53fee8b7832cc04fc16ab92f152cc563fd1091d7350ab15b0bdd8eeef
+7beaacf420ed84b2553e7bf620d1231c56bc767476fa74fc2b4ec8fd63c2c15498c695851ff8bb3c8e049a3fcbc421ca48fd3e5261acb7a
+04171f1418099978c30b797a4809a9ab28bada43812dbdff65907c73416f31e3cf2a42c2bab34d87f6659a311e4b7acae034bb57c725053
+55ebe4fe31f079bbec52eaa89567707e8508c157e81b0ef5d83d26b878d5b9890d67884cd5b3fecdbade29db3d4aa37dbe5b58884e80f40
+10855b831760cd9bcabc25edbfeacc4328d24525461feafc61f3cb6b23aa9f9e10b4cfd766dd0bdf352a298974b38dcd6e1b688eb2f843f
+1ad3748f35a1f0bdc4c14b11619fad9bd8d169ab2ed0df08bb8cc18e15a950608ffb
+
+4ea1ab9153acf05ffd0592532ba816fd52f6719acfe01502f1a3605458a1b1809664fe875c2db1b90000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000
+
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00000000000000000000000000000000000000000000000000000000000000000000</code></pre>
+<h2 id="looking-at-what-we-found-math">Looking at what we found + math</h2>
+<p>So based on the above discoveries we now have some of the upper bits of <span class="math inline">\(n\)</span>, none of <span class="math inline">\(e\)</span>, none of <span class="math inline">\(d\)</span>, some of the lower bits of <span class="math inline">\(p\)</span>, all of <span class="math inline">\(q\)</span>, all of <span class="math inline">\(d \mod (p-1)\)</span>, some of <span class="math inline">\(d \mod (q-1)\)</span>, and none of the rest. Let’s call the <span class="math inline">\(d \mod (p-1)\)</span> and <span class="math inline">\(d \mod (q-1)\)</span> and <span class="math inline">\(dq\)</span> respectively. It’s about time we figure out how these variables are actually used. RSA depends on prime factorization of massive numbers, since this is a hard thing for computers to accomplish in a short period of time. So what we really need is to find both <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span> prime factors. In order to find the rest of <span class="math inline">\(p\)</span> we will have to use brute force. In order to make the brute force possible we have to use some math, which I won’t describe in detail and will instead just provide the important formula.</p>
+<p><span class="math display">\[
+p = \frac{e \cdot dp - 1}{k_p} \text{ where } 3 \leq k_p &lt; e
+\]</span></p>
+<p>Notice that we are missing <span class="math inline">\(e\)</span>, however a common choice for <span class="math inline">\(e\)</span> is <span class="math inline">\(65537\)</span> so we can guess that that is what was used for our corrupted key. If this was not the case we could easily brute force <span class="math inline">\(e\)</span> as well. So now all we have to do is iterate through all of the values of <span class="math inline">\(k_p\)</span> until we find a prime number whose lower bits match the ones we know. This gives us the value of <span class="math inline">\(p\)</span>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sympy</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> <span class="dv">65537</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>upper_n <span class="op">=</span> ...</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>lower_p <span class="op">=</span> <span class="bn">0xdd8c516b1906ebc550f093</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>q <span class="op">=</span> ...</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>dp <span class="op">=</span> ...</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> kp <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>, e):</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    p_mul <span class="op">=</span> dp <span class="op">*</span> e <span class="op">-</span> <span class="dv">1</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Only need to continue if p_mul is divisible by kp</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> p_mul <span class="op">%</span> kp <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> (p_mul <span class="op">//</span> kp) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Check if number is prime and ends with our known lower bits</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> sympy.isprime(p) <span class="kw">and</span> <span class="bu">hex</span>(p).endswith(<span class="bu">hex</span>(lower_p)[<span class="dv">2</span>:]):</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="bu">hex</span>(p))</span></code></pre></div>
+<h2 id="math-to-recover-the-pem-file">Math to recover the PEM file</h2>
+<p>At this point we can calculate the rest of the variables we need to create a new pem file. I used the Crypto library to generate the RSA PEM file from <span class="math inline">\(n\)</span>, <span class="math inline">\(e\)</span>, <span class="math inline">\(d\)</span>, <span class="math inline">\(p\)</span>, and <span class="math inline">\(q\)</span>.</p>
+<p><span class="math display">\[\begin{align}
+n &amp;= p \cdot q\\
+\phi &amp;= (p-1) \cdot (q-1)\\
+d &amp;= e^{-1} \mod \phi
+\end{align}\]</span></p>
+<h2 id="we-have-the-pem-file-now-what">We have the PEM file… now what?</h2>
+<p>At this point we have the file completely reassembled and de-corrupted but how can we use it to become root? Well the solution is to ssh into the root user from our unprivileged user, using the pem file.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> fixed.pem root@127.0.0.1</span></code></pre></div>
+<p>This logs us in as root and now we can simply run</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /root/flag</span></code></pre></div>
+<p>to get the flag.</p>
+</body>
+</html>

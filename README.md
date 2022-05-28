@@ -195,11 +195,13 @@ for kp in range(3, e):
 At this point we can calculate the rest of the variables we need to create a new pem file. I used
 the Crypto library to generate the RSA PEM file from $n$, $e$, $d$, $p$, and $q$.
 
+$$
 \begin{align}
 n &= p \cdot q\\
 \phi &= (p-1) \cdot (q-1)\\
 d &= e^{-1} \mod \phi
 \end{align}
+$$
 
 ## We have the PEM file... now what?
 At this point we have the file completely reassembled and de-corrupted but how can we use it to
